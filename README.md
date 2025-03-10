@@ -116,10 +116,9 @@ To resolve these issues and create an optimal network, we implement a two-step o
 1. **Cutting**: Roads are segmented at the locations of projected buildings, following the method from the Pre-Cutting section.
 2. **Optimization**: The algorithm removes unnecessary roads, specifically those positioned at the network's end that aren’t connected to any buildings. This is done by identifying extremal roads and deleting them.
 
-This process significantly reduces the network size, improving its linear density and economic viability, as shown in the figure comparison below for the city of Breteuil-sur-Noye, before (left) and after (right) optimization.
+![FIG_Breteuil_OptimizationProcess](https://github.com/user-attachments/assets/a2d59307-777a-4750-8ec8-ce17c5f5995b)
 
-![FIG_Breteuil_OptimizationComparison](https://github.com/user-attachments/assets/27544b70-f3e2-4015-844b-4f69885ebdd3)
-
+This process significantly reduces the network size, improving its linear density and economic viability.
 
 
 ## Results
