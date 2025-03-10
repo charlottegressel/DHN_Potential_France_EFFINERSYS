@@ -1,3 +1,4 @@
+
 # Assessing DHN potential in France
 
 This work implements a method for assessing **DHNs' implementation potential in France**, using a mapping and optimization algorithm accross the French territory. In this application, we first apply our tool at the local scale, and then expand it to the department of Oise.
@@ -57,6 +58,10 @@ Basically, roads are divided without considering the buildings' positions. To fi
 2) Projecting buildings points on roads and cutting roads on these projected points.
 Now the data is ready for use.
 
+An example of the pre-cutting application is given on the figure below for the city of Bretuil-sur-Noye.
+
+![FIG_Breteuil_PrecuttingProcess](https://github.com/user-attachments/assets/60dc4c04-d07a-4c33-85b1-661e88c2d5b8)
+
 
 #### Mapping Algorithm
 
@@ -64,7 +69,7 @@ To model the **District Heating Network (DHN)**, we define three types of nodes:
 
 Edges represent possible pipe connections, ensuring efficient heat distribution. The **Dijkstra algorithm** is then applied to optimize network expansion, prioritizing either **heat demand** (highest consumers first) or **proximity to the heat plant**. Connections follow strict rules to balance **cost efficiency and computational performance**.  
 
-This graph-based approach enables effective DHN planning, minimizing infrastructure costs while ensuring optimal heat distribution. 🚀
+This graph-based approach enables effective DHN planning, minimizing infrastructure costs while ensuring optimal heat distribution.
 
 The **Dijkstra Algorithm** is used to iteratively connect buildings to a **District Heating Network (DHN)**, starting with those having the highest heat demand. A **priority order** ensures that buildings with the largest heat demand are connected first, but this order can be adjusted for specific constraints, such as geographical challenges.
 
@@ -100,7 +105,21 @@ The connection process is implemented in the **Graph class** in the code, which 
 
 The entire process is summarized in the flowchart below.
 
-![Algorithm Summary](path/to/your/image.png)
+![FIG_AlgoSummary](https://github.com/user-attachments/assets/3bc74ad0-5e43-4462-97d9-c9f1b2c3613c)
+
+### Optimization method
+
+After executing the mapping algorithm, some discrepancies may remain, such as roads being "too long". This is due to the fact that some projected buildings are projected on other roads than those which are actually connected to the network.
+
+To resolve these issues and create an optimal network, we implement a two-step optimization process:
+
+1. **Cutting**: Roads are segmented at the locations of projected buildings, following the method from the Pre-Cutting section.
+2. **Optimization**: The algorithm removes unnecessary roads, specifically those positioned at the network's end that aren’t connected to any buildings. This is done by identifying extremal roads and deleting them.
+
+This process significantly reduces the network size, improving its linear density and economic viability, as shown in the figure comparison below for the city of Breteuil-sur-Noye, before (left) and after (right) optimization.
+
+![FIG_Breteuil_OptimizationComparison](https://github.com/user-attachments/assets/27544b70-f3e2-4015-844b-4f69885ebdd3)
+
 
 
 ## Results
