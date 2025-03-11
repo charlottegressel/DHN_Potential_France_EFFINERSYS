@@ -195,8 +195,9 @@ For the department of Oise, the following networks were created:
   <img src="https://github.com/user-attachments/assets/ec5120d8-b417-4032-9bb9-59965e0aa377" width="500">
 </p>
 
+France Chaleur provides a map of all existing DHNs across French territory. This map can be exported in GeoPackage format, allowing it to be integrated into our code for comparison with the DHNs created.
 
-And with comparison to real DHNs:
+If we now compare created DHNs to real DHNs, we have:
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/f00d2e6a-5dad-41a8-9fa6-9be567e9a911" width="500">
@@ -213,3 +214,35 @@ At the departmental scale, for the 24 cities in Oise identified as suitable for 
 The departmental approach also allows for the identification of high-potential cities at the local scale, including Beauvais, Breteuil, Chambly, Chantilly, Nogent-sur-Oise, and Grandvilliers. These cities show an exceptional balance between linear density and heat coverage, consistently surpassing **$2.00$ GWh/km/year and $40%$**, respectively.
 
 Overall, our tool effectively optimizes and expands district heating network development in Oise, unveiling France's growing potential for heat coverage. However, the unique strength of our model lies in its ability not only to estimate potential in terms of heat coverage but also to assess economic potential, pinpointing highly promising and specific areas. Consequently, this study offers a comprehensive overview of heat potential at the departmental level while also capturing the nuanced specificities at the local scale and adapting to the municipality's objectives and constraints.
+
+## Case Study - Modifying Ranking & Constraint
+
+We chose the case study of Grandvilliers in Oise, a municipality with 2,800 inhabitants and 153 buildings. The goal was to explore the impact of various changes in the model on the district heating network (DHN) design.
+
+### Heat Plant Location
+We tested three potential heat plant locations near open fields. The results showed significant variation across the locations:
+- **Heat Plant 1** produced a highly profitable network but had relatively low heat coverage (37.59%).
+- **Heat Plant 3** achieved nearly 90% heat coverage but with a lower linear density of 1.72 GWh/km/year.
+- **Heat Plant 2** struck a balance between coverage and linear density, with 52.28% heat coverage and 2.34 GWh/km/year.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/bcf76c1d-656e-4b4d-a784-b8b91f89648c" width="400">
+</p>
+
+The study demonstrated that the optimal plant location depends on municipal priorities, with all locations proving economically viable.
+
+### Random and Distance Rankings
+We also explored alternative methods for ranking buildings for DHN expansion:
+- **Random Class:** This method had a significant impact on network performance. For example, Random Class 1 produced a non-viable network, while Random Class 2 generated a network with a linear density of 2.56 GWh/km/year and heat coverage of 29.50%.
+- **Distance Class:** This method, which prioritizes connecting the nearest buildings, led to two out of three networks being economically viable. Heat Plant 1 and Heat Plant 3 performed well with high linear density and heat coverage (56.49% and 85.84%, respectively). However, Heat Plant 2 performed poorly due to the proximity of low-demand buildings.
+
+### Constraint Modification
+We also modified the connection constraint to **$R_{\text{net}} \geq d$**, making it more restrictive. This change resulted in a network that connected all buildings in the city, but with very low linear density (1.24 GWh/km/year) and 100% coverage. While this method could be viable in cities with favorable layouts, it produced random and generally inefficient outcomes.
+
+### Conclusion
+The case study illustrates the importance of selecting the right heat plant location and ranking method for optimal DHN design. The results emphasize the need for flexibility in approach, as different methods may suit different municipal objectives, balancing profitability, connectivity, and efficiency.
+
+Modifying specific algorithm features also helps determine the best configuration, such as building ranking. The ranking class is particularly crucial for optimal mapping. While the distance-based ranking to the heat plant can yield good results, it may overlook potential in certain cities depending on heat plant locations. The most reliable ranking remains the heat demand descending order, as it fully captures the area’s potential and ensures economic viability if the heat plant is reasonably located.
+
+## END
+*All these results are best described and explain in the article PDF "Assessing High-Potential Areas DHNs in France" on the repositery.*
